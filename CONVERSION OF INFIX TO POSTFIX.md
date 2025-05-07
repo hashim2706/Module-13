@@ -29,12 +29,42 @@ To write a Python program to convert a given Infix expression to Postfix express
 
 ### PROGRAM
 
-```
+```python
+Op = set(['+','*','+','(',')'])
+pr= {'+':1,'*':2} 
+ 
+ 
+def infixToPostfix(exp): 
 
+    stack = [] 
+    otp = '' 
+    
+    for char in exp:
+        if char not in Op:
+            otp+=char
+        elif char=='(':
+            stack.extend('(')
+        elif char==')':
+            while stack and stack[-1]!='(':
+                otp+=stack.pop()
+            stack.pop()
+        else:
+            while stack and stack[-1]!='('and pr[char]<=pr[stack[-1]]:
+                otp+=stack.pop()
+            stack.append(char)
+    while stack:
+        otp+=stack.pop()# Write your code here
+    
+    return otp
+exp =input()
+print('Infix notation: ',exp)
+
+print('Postfix notation: ',infixToPostfix(exp))
 ```
 
 ### OUTPUT
 
+![Screenshot 2025-05-02 195654](https://github.com/user-attachments/assets/4822f619-17a2-4ba6-b259-2bed798c5338)
 
 ### RESULT
-
+Thus, the program executed successfully and the output is verified.
